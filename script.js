@@ -13,17 +13,34 @@ function drawGrid(limit) {
   }
 }
 function reset() {
-  // TODO: pop up prompt and get grid size from user
+  // TODO: pop up prompt and get grid size from user -- DONE
+  // TODO: clear the container -- DONE
+  // TODO: draw new grid with new size -- DONE
+  // TODO: Validate the input! -- DONE
 
-  let gridSize = prompt('Enter the grid size, please.'); // TODO: Validate the input!
-  // TODO: clear the container
+  let gridSize;
+
+  do {
+    gridSize = prompt('Enter the grid size between 2 and 100, please.');
+  } while (!isValidSize(gridSize));
 
   while (container.firstChild) {
     container.removeChild(container.firstChild);
   }
-  // TODO: draw new grid with new size
 
   drawGrid(gridSize);
 }
 
-drawGrid(10);
+function isValidSize(input) {
+  if (isNaN(input)) return false; // ignore not-a-number cases.
+
+  const numValue = Number(input);
+
+  if (!Number.isInteger(numValue)) return false; // ignore non-integer cases.
+
+  if (numValue < 2 || numValue > 100) return false; // ignore not-in-a-range cases.
+
+  return true;
+}
+
+drawGrid(4);
