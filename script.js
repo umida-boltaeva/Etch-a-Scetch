@@ -13,21 +13,22 @@ function drawGrid(limit) {
   }
 }
 function reset() {
-  // TODO: pop up prompt and get grid size from user -- DONE
-  // TODO: clear the container -- DONE
-  // TODO: draw new grid with new size -- DONE
-  // TODO: Validate the input! -- DONE
-
   let gridSize;
 
+  // pop up prompt and get grid size from user
   do {
     gridSize = prompt('Enter the grid size between 2 and 100, please.');
+
+    //if cancel clicked on prompt, it shouldn't reset
+    if (gridSize == null) return;
   } while (!isValidSize(gridSize));
 
+  // clear the container
   while (container.firstChild) {
     container.removeChild(container.firstChild);
   }
 
+  // draw new grid with new size
   drawGrid(gridSize);
 }
 
@@ -43,4 +44,4 @@ function isValidSize(input) {
   return true;
 }
 
-drawGrid(4);
+drawGrid(16);
